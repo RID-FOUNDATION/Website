@@ -19,6 +19,26 @@
 
   <body>
     <div id="root"></div>
+    
+    <!-- GitHub Pages deep-link fix (handles /Website/about on refresh) -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get("p");
+        if (!p) return;
+
+        try {
+          p = decodeURIComponent(p);
+        } catch (e) {}
+
+        // If p is like "/about", rebuild full path under the Pages base.
+        var base = "/Website";
+        var newPath = base + (p.startsWith("/") ? p : "/" + p);
+
+        window.history.replaceState(null, "", newPath);
+      })();
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

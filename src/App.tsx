@@ -15,12 +15,17 @@ import Environment from "./pages/AreaOfWork/Environment";
 
 const queryClient = new QueryClient();
 
+// BrowserRouter works more reliably when basename has no trailing slash
+const rawBase = import.meta.env.BASE_URL; // "/" (dev) or "/Website/" (GitHub Pages)
+const basename =
+  rawBase.endsWith("/") && rawBase !== "/" ? rawBase.slice(0, -1) : rawBase;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutUs />} />

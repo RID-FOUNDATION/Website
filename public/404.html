@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        // GitHub Pages serves this file for unknown routes.
+        // We redirect to the app root with the original path in a query param.
+        var base = "/Website";
+        var path = window.location.pathname;
+
+        // Remove the base from the path (if present)
+        if (path.indexOf(base) === 0) {
+          path = path.substring(base.length);
+        }
+
+        var newUrl =
+          base +
+          "/?p=" +
+          encodeURIComponent(path + window.location.search + window.location.hash);
+
+        window.location.replace(newUrl);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
